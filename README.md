@@ -47,10 +47,11 @@
 
   HomePage                 |    Detail Page        
 :-------------------------:|:-------------------------:
-
+![HomePage](./screenshots/app-1.jpg) | ![DetailPage](screenshots/app-2.jpg)
 
   HomePage                 |    Detail Page      
 :-------------------------:|:-------------------------:
+![HomePage](screenshots/app-3.jpg) | ![DetailPage](screenshots/app-4.jpg)
 
 ## Estructura del Proyecto
 ```sh
