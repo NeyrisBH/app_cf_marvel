@@ -45,11 +45,11 @@
 
 ## Android Screenshots
 
-  HomePage                 |    Detail Page        
+  Drawer                 |    Notifications Screen        
 :-------------------------:|:-------------------------:
 ![HomePage](./screenshots/app-1.jpg) | ![DetailPage](screenshots/app-2.jpg)
 
-  HomePage                 |    Detail Page      
+  Detail Page              |    HomePage      
 :-------------------------:|:-------------------------:
 ![HomePage](screenshots/app-3.jpg) | ![DetailPage](screenshots/app-4.jpg)
 
