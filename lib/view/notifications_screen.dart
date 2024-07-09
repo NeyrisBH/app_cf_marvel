@@ -1,5 +1,7 @@
+import 'package:app_cf_marvel/main_store/main_state.dart';
 import 'package:app_cf_marvel/services/notifications_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class NotificationsScreen extends StatefulWidget {
   const NotificationsScreen({super.key});
@@ -12,6 +14,7 @@ class NotificationsScreenState extends State<NotificationsScreen> {
   bool isSelectedHourly = false;
   bool isSelectedDaily = false;
   bool isSelectedWeekly = false;
+  
 
   @override
   void initState() {
@@ -22,6 +25,8 @@ class NotificationsScreenState extends State<NotificationsScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    MainState mainState = Provider.of<MainState>(context);
+    var userState = mainState.userState;
 
     return Scaffold(
       body: SizedBox(
@@ -94,7 +99,7 @@ class NotificationsScreenState extends State<NotificationsScreen> {
                 child: ElevatedButton(
                   onPressed: () {
                     NotificationsService.sendInstantNotification(
-                      title: 'title',
+                      title: '@${userState.user.value.nickname}, es un buen día para disfrutar de Marvel',
                       body: 'body',
                       playload: 'Playload',
                     );

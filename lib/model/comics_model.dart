@@ -1,3 +1,5 @@
+import 'package:app_cf_marvel/utils/validate.dart';
+
 class ComicModel {
   final int id;
   final String title;
@@ -5,18 +7,21 @@ class ComicModel {
   final String thumbnailUrl;
 
   ComicModel({
-    required this.id,
-    required this.title,
-    required this.description,
-    required this.thumbnailUrl,
+    this.id = 0,
+    this.title = '',
+    this.description = '',
+    this.thumbnailUrl = '',
   });
 
-  factory ComicModel.fromJson(Map<String, dynamic> json) {
+  factory ComicModel.toObject(Map<String, dynamic> data) {
+    Validate validate = Validate(data);
     return ComicModel(
-      id: json['id'] ?? 0,
-      title: json['title'] ?? '',
-      description: json['description'] ?? '',
-      thumbnailUrl: _parseThumbnailUrl(json['thumbnail']),
+      id: validate.checkKeyExists(key: 'id', initialize: 0),
+      title: validate.checkKeyExists(key: 'title', initialize: ''),
+      description: validate.checkKeyExists(key: 'description', initialize: ''),
+      thumbnailUrl: _parseThumbnailUrl(
+        validate.checkKeyExists(key: 'thumbnail', initialize: ''),
+      ),
     );
   }
 
@@ -28,4 +33,11 @@ class ComicModel {
     }
     return 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available';
   }
+
+  Map<String, dynamic> toMap() => {
+    'id': id,
+    'title': title,
+    'description': description,
+    'thumbnail': thumbnailUrl
+  };
 }

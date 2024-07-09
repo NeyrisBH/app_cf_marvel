@@ -1,6 +1,7 @@
 import 'package:app_cf_marvel/data/remote/apiMarvel.dart';
 import 'package:app_cf_marvel/model/comics_model.dart';
 import 'package:app_cf_marvel/utils/constants.dart';
+import 'package:flutter/foundation.dart';
 
 abstract class ComicsRepo {
   Future<List<ComicModel>> fetchComics();
@@ -24,11 +25,13 @@ class ComicsRepoImpl extends ComicsRepo {
         },
       );
       List<ComicModel> comics = (response['data']['results'] as List)
-          .map((json) => ComicModel.fromJson(json))
+          .map((json) => ComicModel.toObject(json))
           .toList();
       return comics;
     } catch (error) {
-      print('Error fetching comics: $error');
+      if (kDebugMode) {
+        print('Error fetching comics: $error');
+      }
       throw Exception('Error fetching comics');
     }
   }

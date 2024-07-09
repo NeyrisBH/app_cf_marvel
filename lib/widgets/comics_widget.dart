@@ -13,7 +13,7 @@ class ComicsWidget extends StatefulWidget {
 }
 
 class ComicsWidgetState extends State<ComicsWidget> {
-  final ComicsState comicsState = ComicsState();
+  late ComicsState comicsState;
 
   @override
   void initState() {
