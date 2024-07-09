@@ -4,6 +4,20 @@
 
 `app_cf_marvel` es una aplicación móvil desarrollada con Flutter y Dart que consume la API de Marvel para proporcionar información y detalles sobre cómics de Marvel. La aplicación utiliza patrones arquitectónicos como Modelo-Vista-Controlador (MVC) y el patrón Provider para la gestión del estado reactivo. Además, integra funcionalidades avanzadas como autenticación OAuth2, notificaciones locales, compras dentro de la aplicación y publicidad. La interfaz de usuario está optimizada con animaciones y transiciones fluidas para una experiencia de usuario mejorada.
 
+## Herramientas Usadas
+- **IDE:** Android Studio
+- **Framework:** Flutter SDK
+- **Lenguaje:** Dart
+- **Gestión de Estado:** Provider
+- **Autenticación OAuth:** flutter_oauth
+- **HTTP Requests:** http
+- **Almacenamiento Local:** sqflite
+- **Animaciones:** animations
+- **Notificaciones Locales:** flutter_local_notifications
+- **Compras dentro de la App:** flutter_inapp_purchase
+- **Publicidad:** google_mobile_ads
+
+
 ## Características
 
 - **Consumo de API de Marvel**: Obtén información detallada sobre cómics de Marvel.
