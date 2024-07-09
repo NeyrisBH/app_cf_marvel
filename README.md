@@ -41,7 +41,7 @@
    cd app_cf_marvel
 
 2. Instala las dependencias:
-
+      ```sh
       flutter pub get
 
 3. Configura la API de Marvel:
