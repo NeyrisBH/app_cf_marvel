@@ -5,12 +5,14 @@ class ComicModel {
   final String title;
   final String description;
   final String thumbnailUrl;
+  bool isFavorite;
 
   ComicModel({
     this.id = 0,
     this.title = '',
     this.description = '',
     this.thumbnailUrl = '',
+    this.isFavorite = false,
   });
 
   factory ComicModel.toObject(Map<String, dynamic> data) {

@@ -15,6 +15,7 @@ class ComicsWidget extends StatefulWidget {
 
 class ComicsWidgetState extends State<ComicsWidget> {
   late ComicsState comicsState;
+  List<ComicModel> favoritesList = [];
 
   @override
   void initState() {
@@ -98,24 +99,46 @@ class ComicsWidgetState extends State<ComicsWidget> {
                       ),
                     ),
                     const SizedBox(height: 8.0),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                ComicDetailsScreen(comic: comic),
+                    Row(
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    ComicDetailsScreen(comic: comic),
+                              ),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: LightColor.lightBlue,
                           ),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: LightColor.lightBlue,
-                      ),
-                      child: const Text(
-                        'Ver Detalles',
-                        style: TextStyle(color: LightColor.background),
-                      ),
-                    ),
+                          child: const Text(
+                            'Ver Detalles',
+                            style: TextStyle(color: LightColor.background),
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            setState(() {
+                              comic.isFavorite = !comic.isFavorite;
+                            });
+                            if (comic.isFavorite) {
+                              favoritesList.add(comic);
+                            } else {
+                              favoritesList.removeWhere(
+                                  (favComic) => favComic.title == comic.title);
+                            }
+                          },
+                          icon: Icon(
+                            Icons.star,
+                            color: comic.isFavorite ? LightColor.red : LightColor.grey,
+                            size: 30,
+                          ),
+                        ),
+                      ],
+                    )
                   ],
                 ),
               ),

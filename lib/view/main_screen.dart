@@ -25,7 +25,7 @@ class MainScreenState extends State<MainScreen> {
 
   final List<Widget> _pages = [
     const HomeScreen(),
-    const FavoritesScreen(),
+    const FavoritesScreen(favoritesList: [],),
     const NotificationsScreen(),
   ];
 

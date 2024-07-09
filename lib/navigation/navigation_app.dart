@@ -18,7 +18,7 @@ class RouteGenerator {
       case loginScreen:
         return TransitionsExample.fadeRoute(const LoginScreen());
       case favoritesScreen:
-        return TransitionsExample.fadeRoute(const FavoritesScreen());
+        return TransitionsExample.fadeRoute(const FavoritesScreen(favoritesList: [],));
       case notificationsScreen:
         return TransitionsExample.fadeRoute(const NotificationsScreen());
       default:
