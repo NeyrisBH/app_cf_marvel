@@ -1,3 +1,4 @@
+import 'package:app_cf_marvel/data/local/database_app.dart';
 import 'package:app_cf_marvel/main_store/main_state.dart';
 import 'package:app_cf_marvel/model/comics_model.dart';
 import 'package:app_cf_marvel/res/theme/light_color.dart';
@@ -120,21 +121,24 @@ class ComicsWidgetState extends State<ComicsWidget> {
                           ),
                         ),
                         IconButton(
-                          onPressed: () {
+                          onPressed: () async {
                             setState(() {
                               comic.isFavorite = !comic.isFavorite;
                             });
+                            final db = DatabaseApp();
                             if (comic.isFavorite) {
-                              favoritesList.add(comic);
+                              await db.insertFavorite(comic.title,
+                                  comic.description ?? '', comic.thumbnailUrl ?? '');
                             } else {
-                              favoritesList.removeWhere(
-                                  (favComic) => favComic.title == comic.title);
+                              final favorites = await db.getFavorites();
+                              final favorite = favorites.firstWhere(
+                                  (fav) => fav['title'] == comic.title);
+                              await db.deleteFavorite(favorite['id']);
                             }
                           },
                           icon: Icon(
-                            Icons.star,
-                            color: comic.isFavorite ? LightColor.red : LightColor.grey,
-                            size: 30,
+                            comic.isFavorite ? Icons.star : Icons.star_border,
+                            color: comic.isFavorite ? Colors.red : Colors.grey,
                           ),
                         ),
                       ],
