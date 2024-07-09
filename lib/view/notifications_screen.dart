@@ -1,17 +1,20 @@
+import 'package:app_cf_marvel/model/comics_model.dart';
 import 'package:app_cf_marvel/services/notifications_service.dart';
 import 'package:flutter/material.dart';
 
 class NotificationsScreen extends StatefulWidget {
-  const NotificationsScreen({super.key});
+  const NotificationsScreen({Key? key}) : super(key: key);
 
   @override
-  NotificationsScreenState createState() => NotificationsScreenState();
+  _NotificationsScreenState createState() => _NotificationsScreenState();
 }
 
-class NotificationsScreenState extends State<NotificationsScreen> {
+class _NotificationsScreenState extends State<NotificationsScreen> {
   bool isSelectedHourly = false;
   bool isSelectedDaily = false;
   bool isSelectedWeekly = false;
+
+  List<ComicModel> comics = [];
 
   @override
   void initState() {
@@ -40,11 +43,10 @@ class NotificationsScreenState extends State<NotificationsScreen> {
                     isSelectedHourly = value;
                   });
                   if (isSelectedHourly) {
-                    NotificationsService.sendPeriodicNotification(
-                      title: 'Recurrencia horaria',
-                      body: 'Cuerpo del mensaje',
-                      playload: 'playload',
+                    NotificationsService.sendPeriodicNotificationWithRandomComic(
                       id: 0,
+                      title: 'Recurrencia horaria',
+                      comics: comics,
                     );
                   } else {
                     NotificationsService.cancelPeriodicNotification(id: 0);
@@ -60,13 +62,13 @@ class NotificationsScreenState extends State<NotificationsScreen> {
                   });
                   if (isSelectedDaily) {
                     NotificationsService.sendPeriodicNotificationDay(
+                      id: 1,
                       title: 'Recurrencia diaria',
                       body: 'Cuerpo del mensaje',
                       playload: 'playload',
-                      id: 1,
                     );
                   } else {
-                    NotificationsService.cancelPeriodicNotification(id: 1);
+                    NotificationsService.cancelPeriodicNotificationDay(id: 1);
                   }
                 },
               ),
@@ -79,13 +81,13 @@ class NotificationsScreenState extends State<NotificationsScreen> {
                   });
                   if (isSelectedWeekly) {
                     NotificationsService.sendPeriodicNotificationWeek(
+                      id: 2,
                       title: 'Recurrencia semanal',
                       body: 'Cuerpo del mensaje',
                       playload: 'playload',
-                      id: 2,
                     );
                   } else {
-                    NotificationsService.cancelPeriodicNotification(id: 2);
+                    NotificationsService.cancelPeriodicNotificationWeek(id: 2);
                   }
                 },
               ),
@@ -93,10 +95,9 @@ class NotificationsScreenState extends State<NotificationsScreen> {
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    NotificationsService.sendInstantNotification(
-                      title: 'title',
-                      body: 'body',
-                      playload: 'Playload',
+                    NotificationsService.sendInstantNotificationWithRandomComic(
+                      comics,
+                      title: 'Notificación instantánea',
                     );
                   },
                   child: const Text('Recibir un detalle'),

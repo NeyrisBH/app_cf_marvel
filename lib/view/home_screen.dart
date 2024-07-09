@@ -1,5 +1,6 @@
 import 'package:app_cf_marvel/res/theme/light_color.dart';
 import 'package:app_cf_marvel/widgets/comics_widget.dart';
+import 'package:app_cf_marvel/widgets/series_widget.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -38,7 +39,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 SizedBox(
                   height: 500,
-                  child: ComicsWidget(),
+                  child: SeriesWidget(),
                 ),
               ],
             ),

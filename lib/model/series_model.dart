@@ -1,34 +1,31 @@
-import 'package:app_cf_marvel/utils/validate.dart';
-
 class SeriesModel {
-  int id;
-  String title;
-  String description;
-  String thumbnailUrl;
+  final int id;
+  final String title;
+  final String description;
+  final String thumbnailUrl;
 
   SeriesModel({
-    this.id = 0,
-    this.title = "",
-    this.description = "",
-    this.thumbnailUrl = "",
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.thumbnailUrl,
   });
 
-  factory SeriesModel.fromMap(Map<String, dynamic> map) {
-    Validate validate = Validate(map);
+  factory SeriesModel.fromJson(Map<String, dynamic> json) {
     return SeriesModel(
-      id: validate.checkKeyExists(key: "id", initialize: 0),
-      title: validate.checkKeyExists(key: "title", initialize: ""),
-      description: validate.checkKeyExists(key: "description", initialize: ""),
-      thumbnailUrl: validate.checkKeyExists(key: "thumbnailUrl", initialize: ""),
+      id: json['id'] ?? 0,
+      title: json['title'] ?? '',
+      description: json['description'] ?? '',
+      thumbnailUrl: _parseThumbnailUrl(json['thumbnail']),
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      "id": id,
-      "title": title,
-      "description": description,
-      "thumbnailUrl": thumbnailUrl,
-    };
+  static String _parseThumbnailUrl(Map<String, dynamic>? thumbnail) {
+    if (thumbnail != null &&
+        thumbnail.containsKey('path') &&
+        thumbnail.containsKey('extension')) {
+      return '${thumbnail['path']}.${thumbnail['extension']}';
+    }
+    return 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available';
   }
 }

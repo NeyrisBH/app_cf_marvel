@@ -8,4 +8,5 @@ const String urlMarvel = 'https://gateway.marvel.com/v1/public';
 const String apiKeyMarvel = '776d27f4503f9642f702889fb1cb6be0';
 const String hashMarvel = '1d6f981361d6726e532b2ba8524bb31c';
 const String comicsApi = '/comics';
+const String seriesApi = '/series';
 const String ts = '1';
