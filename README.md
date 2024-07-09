@@ -1,13 +1,63 @@
 # app_cf_marvel
 
-Esta aplicación está diseñada para consumir la API de Marvel y proporcionar a los usuarios información y detalles sobre cómics de Marvel. Utiliza patrones arquitectónicos como el Modelo-Vista-Controlador (MVC) y el patrón Provider para la gestión del estado reactivo. Además, integra funcionalidades avanzadas como autenticación OAuth2, notificaciones locales, compras dentro de la aplicación, y publicidad. La interfaz de usuario está optimizada con animaciones y transiciones fluidas para una experiencia de usuario mejorada.
+## Descripción del Proyecto
 
-## Directory Structure
-```
+`app_cf_marvel` es una aplicación móvil desarrollada con Flutter y Dart que consume la API de Marvel para proporcionar información y detalles sobre cómics de Marvel. La aplicación utiliza patrones arquitectónicos como Modelo-Vista-Controlador (MVC) y el patrón Provider para la gestión del estado reactivo. Además, integra funcionalidades avanzadas como autenticación OAuth2, notificaciones locales, compras dentro de la aplicación y publicidad. La interfaz de usuario está optimizada con animaciones y transiciones fluidas para una experiencia de usuario mejorada.
+
+## Características
+
+- **Consumo de API de Marvel**: Obtén información detallada sobre cómics de Marvel.
+- **Gestión de estado reactivo**: Utilización de Provider para una gestión eficiente del estado.
+- **Autenticación OAuth2**: Integración de OAuth2 para un inicio de sesión seguro.
+- **Notificaciones locales**: Implementación de notificaciones locales para alertar a los usuarios.
+- **Compras dentro de la aplicación**: Facilita las compras de contenido adicional.
+- **Publicidad**: Integración de anuncios para monetizar la aplicación.
+- **Animaciones y transiciones**: Interfaz de usuario optimizada con animaciones y transiciones fluidas.
+
+## Requisitos Previos
+
+- [Flutter](https://flutter.dev/docs/get-started/install)
+- [Dart](https://dart.dev/get-dart)
+
+## Instalación
+
+1. Clona este repositorio:
+   ```sh
+   git clone https://github.com/tu_usuario/app_cf_marvel.git
+   cd app_cf_marvel
+
+2. Instala las dependencias:
+
+      flutter pub get
+
+3. Configura la API de Marvel:
+        Regístrate y obtén tus claves API de Marvel Developer.
+        Configura tus claves API en tu archivo de configuración.
+
+   
+## Uso
+
+1. Ejecuta la aplicación:
+    ```sh
+    flutter run
+
+2. Navega por los cómics de Marvel en la pantalla principal.
+
+## Android Screenshots
+
+  HomePage                 |    Detail Page        
+:-------------------------:|:-------------------------:
+
+
+  HomePage                 |    Detail Page      
+:-------------------------:|:-------------------------:
+
+## Estructura del Proyecto
+```sh
 |-- lib
 |   |-- main.dart
 |   |-- locator.dart
-|   '-- lib
+|   '-- |
 |       |-- data
 |       |   |-- local
 |       |   |    |-- database_app.dart
@@ -71,18 +121,3 @@ Esta aplicación está diseñada para consumir la API de Marvel y proporcionar a
 |   |-- app-3.png
 |   '-- app-4.png
 '-- test
-
-
-
-## Android Screenshots
-
-  HomePage                 |    Detail Page        
-:-------------------------:|:-------------------------:
-![](https://github.com/TheAlphamerc/flutter_healthcare_app/blob/master/screenshots/screenshot_1.jpg?raw=true)|![](https://github.com/TheAlphamerc/flutter_healthcare_app/blob/master/screenshots/screenshot_2.jpg?raw=true)
-
-  HomePage                 |    Detail Page      
-:-------------------------:|:-------------------------:
-![](https://github.com/TheAlphamerc/flutter_healthcare_app/blob/master/screenshots/screenshot_ios_1.png?raw=true)|![](https://github.com/TheAlphamerc/flutter_healthcare_app/blob/master/screenshots/screenshot_ios_2.png?raw=true)
-
-
-
