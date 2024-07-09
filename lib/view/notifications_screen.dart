@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:app_cf_marvel/main_store/main_state.dart';
+import 'package:app_cf_marvel/model/comics_model.dart';
 import 'package:app_cf_marvel/services/notifications_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,11 +25,21 @@ class NotificationsScreenState extends State<NotificationsScreen> {
     super.initState();
   }
 
+  String getRandomComicTitle(List<ComicModel> comicsList) {
+  if (comicsList.isEmpty) {
+    return 'No hay cómics disponibles';
+  }
+  final random = Random();
+  final randomIndex = random.nextInt(comicsList.length);
+  return comicsList[randomIndex].title;
+}
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     MainState mainState = Provider.of<MainState>(context);
     var userState = mainState.userState;
+    var comicState = mainState.comicsState;
 
     return Scaffold(
       body: SizedBox(
@@ -100,7 +113,7 @@ class NotificationsScreenState extends State<NotificationsScreen> {
                   onPressed: () {
                     NotificationsService.sendInstantNotification(
                       title: '@${userState.user.value.nickname}, es un buen día para disfrutar de Marvel',
-                      body: 'body',
+                      body: 'Ya conocias este comic:${getRandomComicTitle(comicState.comicsList)}',
                       playload: 'Playload',
                     );
                   },

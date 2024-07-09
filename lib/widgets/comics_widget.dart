@@ -1,3 +1,4 @@
+import 'package:app_cf_marvel/main_store/main_state.dart';
 import 'package:app_cf_marvel/model/comics_model.dart';
 import 'package:app_cf_marvel/res/theme/light_color.dart';
 import 'package:app_cf_marvel/view/comics_screen.dart';
@@ -18,6 +19,7 @@ class ComicsWidgetState extends State<ComicsWidget> {
   @override
   void initState() {
     super.initState();
+    comicsState = ComicsState(main: MainState());
     comicsState.fetchComics();
   }
 

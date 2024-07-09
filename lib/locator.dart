@@ -1,4 +1,6 @@
 import 'package:app_cf_marvel/data/remote/apiMarvel.dart';
+import 'package:app_cf_marvel/repository/comics_repo.dart';
+import 'package:app_cf_marvel/repository/series_repo.dart';
 import 'package:app_cf_marvel/repository/session_repo.dart';
 import 'package:app_cf_marvel/repository/user_repo.dart';
 import 'package:get_it/get_it.dart';
@@ -13,5 +15,7 @@ Future<void> setupLocator()async{
   sl.registerLazySingleton<Api>(() => Api());
   sl.registerLazySingleton<SessionRepoImpl>(() => SessionRepoImpl());
   sl.registerLazySingleton<UserRepoImpl>(() => UserRepoImpl());
+  sl.registerLazySingleton<ComicsRepoImpl>(() => ComicsRepoImpl());
+  sl.registerLazySingleton<SeriesRepoImpl>(() => SeriesRepoImpl());
   sl.registerLazySingleton<ApiMarvel>(() => ApiMarvel());
 }
