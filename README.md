@@ -14,7 +14,6 @@
 - **Almacenamiento Local:** sqflite
 - **Animaciones:** animations
 - **Notificaciones Locales:** flutter_local_notifications
-- **Compras dentro de la App:** flutter_inapp_purchase
 - **Publicidad:** google_mobile_ads
 
 
@@ -24,7 +23,6 @@
 - **Gestión de estado reactivo**: Utilización de Provider para una gestión eficiente del estado.
 - **Autenticación OAuth2**: Integración de OAuth2 para un inicio de sesión seguro.
 - **Notificaciones locales**: Implementación de notificaciones locales para alertar a los usuarios.
-- **Compras dentro de la aplicación**: Facilita las compras de contenido adicional.
 - **Publicidad**: Integración de anuncios para monetizar la aplicación.
 - **Animaciones y transiciones**: Interfaz de usuario optimizada con animaciones y transiciones fluidas.
 
