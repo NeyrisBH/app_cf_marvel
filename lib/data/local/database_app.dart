@@ -1,4 +1,5 @@
 import 'package:app_cf_marvel/data/local/tables.dart';
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -15,38 +16,53 @@ class DatabaseApp {
     return _database!;
   }
 
-  Future<Database> _initDatabase() async {
+  _initDatabase() async {
     String path = join(await getDatabasesPath(), name);
-    return await openDatabase(
-      path,
-      version: version,
-      onCreate: _onCreate,
-    );
+    return await openDatabase(path, version: version, onCreate: _onCreate);
   }
 
-  void _onCreate(Database database, int version) async {
+  _onCreate(Database database, int version) async {
+    if (kDebugMode) {
+      print("Creating tables...");
+    }
     for (final table in Tables.tables) {
       await database.execute(table);
     }
   }
 
-  Future<void> insertFavorite(String title, String description, String thumbnailUrl) async {
+  Future<void> insertComic(
+      String title, String description, String thumbnailUrl) async {
     final db = await database;
     await db.insert(
-      Tables.favoritesTable,
-      {'title': title, 'description': description, 'thumbnailUrl': thumbnailUrl},
+      Tables.comicsTable,
+      {
+        'title': title,
+        'description': description,
+        'thumbnailUrl': thumbnailUrl,
+        'rating': 0.0
+      },
     );
   }
 
-  Future<List<Map<String, dynamic>>> getFavorites() async {
+  Future<void> updateRating(int id, double rating) async {
     final db = await database;
-    return await db.query(Tables.favoritesTable);
+    await db.update(
+      Tables.comicsTable,
+      {'rating': rating},
+      where: 'id = ?',
+      whereArgs: [id],
+    );
   }
 
-  Future<void> deleteFavorite(int id) async {
+  Future<List<Map<String, dynamic>>> getComics() async {
+    final db = await database;
+    return await db.query(Tables.comicsTable);
+  }
+
+  Future<void> deleteComic(int id) async {
     final db = await database;
     await db.delete(
-      Tables.favoritesTable,
+      Tables.comicsTable,
       where: 'id = ?',
       whereArgs: [id],
     );

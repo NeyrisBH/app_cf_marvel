@@ -1,3 +1,4 @@
+import 'package:app_cf_marvel/res/theme/light_color.dart';
 import 'package:app_cf_marvel/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -54,7 +55,15 @@ class BannerAdWidgetState extends State<BannerAdWidget> {
             child: AdWidget(ad: _bannerAd!),
           )
         : const SizedBox(
-          child: Text('No hay Ads'),
+          child: Center(
+            child: Text(
+              'No hay Ads',
+              style: TextStyle(
+                color: LightColor.black,
+                fontWeight: FontWeight.w700
+              ),
+            ),
+          )
         );
   }
 }

@@ -122,13 +122,13 @@ class EventsWidgetState extends State<EventsWidget> {
                             });
                             final db = DatabaseApp();
                             if (event.isFavorite) {
-                              await db.insertFavorite(event.title,
+                              await db.insertComic(event.title,
                                   event.description ?? '', event.thumbnailUrl ?? '');
                             } else {
-                              final favorites = await db.getFavorites();
+                              final favorites = await db.getComics();
                               final favorite = favorites.firstWhere(
                                   (fav) => fav['title'] == event.title);
-                              await db.deleteFavorite(favorite['id']);
+                              await db.deleteComic(favorite['id']);
                             }
                           },
                           icon: Icon(
