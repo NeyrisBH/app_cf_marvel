@@ -10,5 +10,6 @@ const String hashMarvel = '1d6f981361d6726e532b2ba8524bb31c';
 const String comicsApi = '/comics';
 const String seriesApi = '/series';
 const String eventsApi = '/events';
+const String idAds = 'ca-app-pub-3940256099942544/6300978111';
 const String limitApi = '25';
 const String ts = '1';

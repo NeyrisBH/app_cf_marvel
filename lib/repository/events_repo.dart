@@ -19,7 +19,7 @@ class EventsRepoImpl extends EventsRepo {
           'apikey': apiKeyMarvel,
           'ts': ts,
           'hash': hashMarvel,
-          'limit': '5',
+          'limit': '10',
         },
       );
       List<EventModel> events = (response['data']['results'] as List)

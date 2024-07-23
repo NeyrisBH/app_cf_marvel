@@ -24,6 +24,7 @@ dependencies:
   permission_handler: ^11.3.1  #For notifications
   flutter_local_notifications: ^17.2.1+1 #For notifications
   http: ^1.2.1
+  google_mobile_ads: ^5.1.0 #For ads
 
 dev_dependencies:
   flutter_test:

@@ -4,6 +4,7 @@ import 'package:app_cf_marvel/main_store/main_state.dart';
 import 'package:app_cf_marvel/model/comics_model.dart';
 import 'package:app_cf_marvel/services/notifications_service.dart';
 import 'package:app_cf_marvel/view_model/comics/comics_state.dart';
+import 'package:app_cf_marvel/widgets/banner_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
@@ -124,14 +125,17 @@ class NotificationsScreenState extends State<NotificationsScreen> {
                         onPressed: () {
                           if (comicsState.comicsList.isNotEmpty) {
                             NotificationsService.sendInstantNotification(
-                              title: '@${userState.user.value.nickname}, es un buen día para disfrutar de Marvel',
-                              body: '¿Ya conocías este cómic: ${getRandomComicTitle(comicsState.comicsList)}?',
+                              title:
+                                  '@${userState.user.value.nickname}, es un buen día para disfrutar de Marvel',
+                              body:
+                                  '¿Ya conocías este cómic: ${getRandomComicTitle(comicsState.comicsList)}?',
                               playload: 'Playload',
                             );
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
-                                content: Text('No hay cómics disponibles para sugerir.'),
+                                content: Text(
+                                    'No hay cómics disponibles para sugerir.'),
                               ),
                             );
                           }
@@ -139,6 +143,10 @@ class NotificationsScreenState extends State<NotificationsScreen> {
                         child: const Text('Recibir sugerencia'),
                       ),
                     ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    const BannerAdWidget(),
                   ],
                 ),
               ),

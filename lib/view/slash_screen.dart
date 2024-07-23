@@ -22,10 +22,10 @@ class SplashScreenState extends State<SplashScreen>
   void initState() {
     super.initState();
     rotationController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 1))
+        AnimationController(vsync: this, duration: const Duration(seconds: 2))
           ..repeat(reverse: true);
     shapeController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 1))
+        AnimationController(vsync: this, duration: const Duration(seconds: 2))
           ..repeat(reverse: true);
     borderRadiusAnimation = BorderRadiusTween(
             begin: BorderRadius.circular(0), end: BorderRadius.circular(100))

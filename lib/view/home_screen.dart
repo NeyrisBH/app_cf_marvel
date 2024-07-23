@@ -56,6 +56,9 @@ class HomeScreen extends StatelessWidget {
                   height: 500,
                   child: EventsWidget(),
                 ),
+                SizedBox(
+                  height: 30,
+                ),
               ],
             ),
           )),

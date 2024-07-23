@@ -3,14 +3,16 @@ import 'package:app_cf_marvel/main_store/main_state.dart';
 import 'package:app_cf_marvel/navigation/route.dart';
 import 'package:app_cf_marvel/res/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 
 import 'navigation/navigation_app.dart';
 
-void main() async{
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
   await setupLocator();
-  runApp(
-      Provider(create:(_)=>MainState(),child:const MarvelCF()));
+  runApp(Provider(create: (_) => MainState(), child: const MarvelCF()));
 }
 
 class MarvelCF extends StatelessWidget {

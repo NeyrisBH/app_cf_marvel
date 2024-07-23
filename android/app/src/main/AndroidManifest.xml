@@ -17,7 +17,8 @@
             android:windowSoftInputMode="adjustResize">
 
             <meta-data
-                android:name="io.flutter.embedding.android.NormalTheme"
+                android:name="com.google.android.gms.ads.APPLICATION_ID"
+                android:value="ca-app-pub-4372819542415353~3085140677"
                 android:resource="@style/NormalTheme"
             />
             <intent-filter>
