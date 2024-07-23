@@ -20,8 +20,7 @@ class ComicsRepoImpl extends ComicsRepo {
           'ts': ts,
           'hash': hashMarvel,
           'startYear': '2024',
-          'limit': '100',
-          'orderBy': '-modified',
+          'limit': limitApi,
         },
       );
       List<ComicModel> comics = (response['data']['results'] as List)

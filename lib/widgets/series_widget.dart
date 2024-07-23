@@ -64,12 +64,7 @@ class SeriesWidgetState extends State<SeriesWidget> {
                   borderRadius: BorderRadius.circular(8.0),
                   child: AspectRatio(
                     aspectRatio: 3 / 4,
-                    child: serie.thumbnailUrl != null
-                        ? Image.network(serie.thumbnailUrl!, fit: BoxFit.cover)
-                        : Image.asset(
-                            'assets/images/image_not_available.png',
-                            fit: BoxFit.cover,
-                          ),
+                    child: Image.network(serie.thumbnailUrl, fit: BoxFit.fill)
                   ),
                 ),
               ),

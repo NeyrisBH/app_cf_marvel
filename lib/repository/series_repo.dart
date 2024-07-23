@@ -20,7 +20,7 @@ class SeriesRepoImpl extends SeriesRepo {
           'ts': ts,
           'hash': hashMarvel,
           'startYear': '2024',
-          'limit': '100',
+          'limit': limitApi,
         },
       );
       List<SeriesModel> series = (response['data']['results'] as List)

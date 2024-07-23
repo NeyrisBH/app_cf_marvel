@@ -1,43 +1,43 @@
 import 'package:app_cf_marvel/data/local/database_app.dart';
 import 'package:app_cf_marvel/main_store/main_state.dart';
-import 'package:app_cf_marvel/model/comics_model.dart';
+import 'package:app_cf_marvel/model/events_model.dart';
 import 'package:app_cf_marvel/res/theme/light_color.dart';
-import 'package:app_cf_marvel/view/comics_screen.dart';
-import 'package:app_cf_marvel/view_model/comics/comics_state.dart';
+import 'package:app_cf_marvel/view/events_screen.dart';
+import 'package:app_cf_marvel/view_model/events/events_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-class ComicsWidget extends StatefulWidget {
-  const ComicsWidget({super.key});
+class EventsWidget extends StatefulWidget {
+  const EventsWidget({super.key});
 
   @override
-  ComicsWidgetState createState() => ComicsWidgetState();
+  EventsWidgetState createState() => EventsWidgetState();
 }
 
-class ComicsWidgetState extends State<ComicsWidget> {
-  late ComicsState comicsState;
-  List<ComicModel> favoritesList = [];
+class EventsWidgetState extends State<EventsWidget> {
+  late EventsState eventsState;
+  List<EventModel> favoritesList = [];
 
   @override
   void initState() {
     super.initState();
-    comicsState = ComicsState(main: MainState());
-    comicsState.fetchComics();
+    eventsState = EventsState(main: MainState());
+    eventsState.fetchEvents();
   }
 
   @override
   Widget build(BuildContext context) {
     return Observer(
       builder: (_) {
-        if (comicsState.isLoading.value) {
+        if (eventsState.isLoading.value) {
           return const Center(child: CircularProgressIndicator());
         } else {
           return ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: comicsState.comicsCount,
+            itemCount: eventsState.eventsCount,
             itemBuilder: (context, index) {
-              final comic = comicsState.comicsList[index];
-              return _buildComicCard(comic, context);
+              final event = eventsState.eventsList[index];
+              return _buildEventCard(event, context);
             },
           );
         }
@@ -45,13 +45,13 @@ class ComicsWidgetState extends State<ComicsWidget> {
     );
   }
 
-  Widget _buildComicCard(ComicModel comic, BuildContext context) {
+  Widget _buildEventCard(EventModel event, BuildContext context) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ComicDetailsScreen(comic: comic),
+            builder: (context) => EventDetailsScreen(event: event),
           ),
         );
       },
@@ -68,7 +68,7 @@ class ComicsWidgetState extends State<ComicsWidget> {
                   borderRadius: BorderRadius.circular(8.0),
                   child: AspectRatio(
                     aspectRatio: 3 / 4,
-                    child: Image.network(comic.thumbnailUrl, fit: BoxFit.fill)
+                    child: Image.network(event.thumbnailUrl, fit: BoxFit.fill)
                   ),
                 ),
               ),
@@ -78,7 +78,7 @@ class ComicsWidgetState extends State<ComicsWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      comic.title,
+                      event.title,
                       style: const TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
@@ -87,7 +87,7 @@ class ComicsWidgetState extends State<ComicsWidget> {
                     ),
                     const SizedBox(height: 4.0),
                     Text(
-                      cutDescription(comic.description),
+                      cutDescription(event.description),
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
@@ -103,7 +103,7 @@ class ComicsWidgetState extends State<ComicsWidget> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    ComicDetailsScreen(comic: comic),
+                                    EventDetailsScreen(event: event),
                               ),
                             );
                           },
@@ -118,22 +118,22 @@ class ComicsWidgetState extends State<ComicsWidget> {
                         IconButton(
                           onPressed: () async {
                             setState(() {
-                              comic.isFavorite = !comic.isFavorite;
+                              event.isFavorite = !event.isFavorite;
                             });
                             final db = DatabaseApp();
-                            if (comic.isFavorite) {
-                              await db.insertFavorite(comic.title,
-                                  comic.description ?? '', comic.thumbnailUrl ?? '');
+                            if (event.isFavorite) {
+                              await db.insertFavorite(event.title,
+                                  event.description ?? '', event.thumbnailUrl ?? '');
                             } else {
                               final favorites = await db.getFavorites();
                               final favorite = favorites.firstWhere(
-                                  (fav) => fav['title'] == comic.title);
+                                  (fav) => fav['title'] == event.title);
                               await db.deleteFavorite(favorite['id']);
                             }
                           },
                           icon: Icon(
-                            comic.isFavorite ? Icons.star : Icons.star_border,
-                            color: comic.isFavorite ? Colors.red : Colors.grey,
+                            event.isFavorite ? Icons.star : Icons.star_border,
+                            color: event.isFavorite ? Colors.red : Colors.grey,
                           ),
                         ),
                       ],

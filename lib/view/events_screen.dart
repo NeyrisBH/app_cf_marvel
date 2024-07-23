@@ -1,17 +1,17 @@
-import 'package:app_cf_marvel/model/series_model.dart';
+import 'package:app_cf_marvel/model/events_model.dart';
 import 'package:app_cf_marvel/res/theme/light_color.dart';
 import 'package:flutter/material.dart';
 
-class SeriesScreen extends StatelessWidget {
-  final SeriesModel serie;
+class EventDetailsScreen extends StatelessWidget {
+  final EventModel event;
 
-  const SeriesScreen({super.key, required this.serie});
+  const EventDetailsScreen({super.key, required this.event});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(serie.title),
+        title: Text(event.title),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -20,11 +20,11 @@ class SeriesScreen extends StatelessWidget {
           children: <Widget>[
             AspectRatio(
               aspectRatio: 3 / 4,
-              child: Image.network(serie.thumbnailUrl, fit: BoxFit.fill)
+              child: Image.network(event.thumbnailUrl, fit: BoxFit.fill)
             ),
             const SizedBox(height: 16.0),
             Text(
-              serie.title,
+              event.title,
               style: const TextStyle(
                   fontSize: 24.0,
                   fontWeight: FontWeight.bold,
@@ -32,7 +32,7 @@ class SeriesScreen extends StatelessWidget {
             ),
             const SizedBox(height: 8.0),
             Text(
-              serie.description ?? '',
+              event.description ?? '',
               style: const TextStyle(fontSize: 16.0, color: LightColor.black),
             ),
           ],

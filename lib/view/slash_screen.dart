@@ -1,4 +1,5 @@
 import 'package:app_cf_marvel/main_store/main_state.dart';
+import 'package:app_cf_marvel/res/theme/light_color.dart';
 import 'package:app_cf_marvel/view/login_screen.dart';
 import 'package:app_cf_marvel/view/main_screen.dart';
 import 'package:flutter/material.dart';
@@ -13,41 +14,69 @@ class SplashScreen extends StatefulWidget {
 
 class SplashScreenState extends State<SplashScreen>
     with TickerProviderStateMixin {
-  double turns = 0.0;
-  late AnimationController animationController;
+  late AnimationController rotationController;
+  late AnimationController shapeController;
+  late Animation<BorderRadius?> borderRadiusAnimation;
 
   @override
   void initState() {
     super.initState();
-    animationController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 2))
+    rotationController =
+        AnimationController(vsync: this, duration: const Duration(seconds: 1))
           ..repeat(reverse: true);
-
+    shapeController =
+        AnimationController(vsync: this, duration: const Duration(seconds: 1))
+          ..repeat(reverse: true);
+    borderRadiusAnimation = BorderRadiusTween(
+            begin: BorderRadius.circular(0), end: BorderRadius.circular(100))
+        .animate(
+            CurvedAnimation(parent: shapeController, curve: Curves.easeOut));
     MainState mainState = Provider.of<MainState>(context, listen: false);
     mainState.sessionState.init().whenComplete(() {
       if (mainState.sessionState.hasSession.value) {
-        Navigator.push(
+        Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (_) => const MainScreen()));
       } else {
-        Navigator.push(
+        Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (_) => const LoginScreen()));
       }
     });
   }
 
   @override
+  void dispose() {
+    rotationController.dispose();
+    shapeController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(
-      child: RotationTransition(
-        turns: animationController,
-        alignment: Alignment.center,
-        child: Icon(
-          Icons.settings_sharp,
-          size: 200,
-          color: Colors.purple.withOpacity(0.7),
+      body: Center(
+        child: RotationTransition(
+          turns: rotationController,
+          alignment: Alignment.center,
+          child: AnimatedBuilder(
+            animation: borderRadiusAnimation,
+            builder: (context, child) {
+              return Container(
+                width: 200,
+                height: 200,
+                decoration: BoxDecoration(
+                  color: LightColor.lightOrange,
+                  borderRadius: borderRadiusAnimation.value,
+                ),
+                child: const Icon(
+                  Icons.settings_sharp,
+                  size: 100,
+                  color: Colors.white,
+                ),
+              );
+            },
+          ),
         ),
       ),
-    ));
+    );
   }
 }

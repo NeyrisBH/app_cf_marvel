@@ -1,5 +1,6 @@
 import 'package:app_cf_marvel/res/theme/light_color.dart';
 import 'package:app_cf_marvel/widgets/comics_widget.dart';
+import 'package:app_cf_marvel/widgets/events_widget.dart';
 import 'package:app_cf_marvel/widgets/series_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -40,6 +41,20 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(
                   height: 500,
                   child: SeriesWidget(),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Text(
+                  'Eventos',
+                  style: TextStyle(
+                      color: LightColor.black,
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 500,
+                  child: EventsWidget(),
                 ),
               ],
             ),

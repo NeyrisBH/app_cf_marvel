@@ -12,8 +12,8 @@ class ApiMarvel {
     dio = Dio(
       BaseOptions(
         baseUrl: urlMarvel,
-        connectTimeout: const Duration(seconds: 30),
-        receiveTimeout: const Duration(seconds: 30),
+        connectTimeout: const Duration(seconds: 40),
+        receiveTimeout: const Duration(seconds: 120),
         headers: {
           HttpHeaders.authorizationHeader: '',
           HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',

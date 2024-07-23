@@ -5,14 +5,9 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class NotificationsService {
-  // Inicializar el plugin de notificaciones locales
-  static FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
-
-  // Llave global para gestionar la navegación
+  static FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
   static GlobalKey<NavigatorState> globalKey = GlobalKey<NavigatorState>();
 
-  // Detalles de la notificación
   static NotificationDetails notificationDetails = const NotificationDetails(
     android: AndroidNotificationDetails(
       'channelId',
@@ -23,35 +18,28 @@ class NotificationsService {
     iOS: DarwinNotificationDetails(threadIdentifier: 'thread_id'),
   );
 
-  // Método para inicializar el plugin
   static Future<void> init() async {
-    AndroidInitializationSettings androidInitializationSettings =
-        const AndroidInitializationSettings('@mipmap/ic_launcher');
-    DarwinInitializationSettings iosInitializationSettings =
-        const DarwinInitializationSettings();
-    InitializationSettings initializationSettings = InitializationSettings(
+    const AndroidInitializationSettings androidInitializationSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
+    const DarwinInitializationSettings iosInitializationSettings = DarwinInitializationSettings();
+    const InitializationSettings initializationSettings = InitializationSettings(
       android: androidInitializationSettings,
       iOS: iosInitializationSettings,
     );
 
     await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
-      onDidReceiveBackgroundNotificationResponse:
-          onDidReceiveBackgroundNotificationResponse,
-      onDidReceiveNotificationResponse: onDidReciveNotificationResponse,
+      onDidReceiveNotificationResponse: onDidReceiveNotificationResponse,
+      onDidReceiveBackgroundNotificationResponse: onDidReceiveBackgroundNotificationResponse,
     );
   }
 
-  // Método para solicitar permiso de notificaciones
-  static void askForNotificationPermission() {
-    Permission.notification.request().then((permissionStatus) {
-      if (permissionStatus != PermissionStatus.granted) {
-        AppSettings.openAppSettings(type: AppSettingsType.notification);
-      }
-    });
+  static Future<void> askForNotificationPermission() async {
+    final permissionStatus = await Permission.notification.request();
+    if (permissionStatus != PermissionStatus.granted) {
+      AppSettings.openAppSettings(type: AppSettingsType.notification);
+    }
   }
 
-  // Método para enviar notificaciones instantáneas
   static void sendInstantNotification({
     required String title,
     required String body,
@@ -66,7 +54,6 @@ class NotificationsService {
     );
   }
 
-  // Método para enviar notificaciones periódicas cada hora
   static void sendPeriodicNotification({
     required int id,
     required String title,
@@ -83,14 +70,10 @@ class NotificationsService {
     );
   }
 
-  // Método para cancelar notificaciones periódicas por hora
-  static Future<void> cancelPeriodicNotification({
-    required int id,
-  }) async {
+  static Future<void> cancelPeriodicNotification({required int id}) async {
     await flutterLocalNotificationsPlugin.cancel(id);
   }
 
-  // Método para enviar notificaciones periódicas cada día
   static void sendPeriodicNotificationDay({
     required int id,
     required String title,
@@ -107,14 +90,10 @@ class NotificationsService {
     );
   }
 
-  // Método para cancelar notificaciones periódicas por día
-  static Future<void> cancelPeriodicNotificationDay({
-    required int id,
-  }) async {
+  static Future<void> cancelPeriodicNotificationDay({required int id}) async {
     await flutterLocalNotificationsPlugin.cancel(id);
   }
 
-  // Método para enviar notificaciones periódicas cada semana
   static void sendPeriodicNotificationWeek({
     required int id,
     required String title,
@@ -131,32 +110,22 @@ class NotificationsService {
     );
   }
 
-  // Método para cancelar notificaciones periódicas por semana
-  static Future<void> cancelPeriodicNotificationWeek({
-    required int id,
-  }) async {
+  static Future<void> cancelPeriodicNotificationWeek({required int id}) async {
     await flutterLocalNotificationsPlugin.cancel(id);
   }
 
-  // Manejar respuesta de notificación
-  static void onDidReciveNotificationResponse(NotificationResponse response) {
-    debugPrint('metodo para manipular respuesta');
+  static void onDidReceiveNotificationResponse(NotificationResponse response) {
     globalKey.currentState?.pushReplacement(
       MaterialPageRoute(
-        builder: (context) =>
-            DisplayNotification(payloadData: response.payload),
+        builder: (context) => DisplayNotification(payloadData: response.payload),
       ),
     );
   }
 
-  // Manejar respuesta de notificación en segundo plano
-  static void onDidReceiveBackgroundNotificationResponse(
-      NotificationResponse response) {
-    debugPrint('metodo para manipular desde segundo plano');
+  static void onDidReceiveBackgroundNotificationResponse(NotificationResponse response) {
     globalKey.currentState?.pushReplacement(
       MaterialPageRoute(
-        builder: (context) =>
-            DisplayNotification(payloadData: response.payload),
+        builder: (context) => DisplayNotification(payloadData: response.payload),
       ),
     );
   }

@@ -20,10 +20,7 @@ class ComicDetailsScreen extends StatelessWidget {
           children: <Widget>[
             AspectRatio(
               aspectRatio: 3 / 4,
-              child: comic.thumbnailUrl != null
-                  ? Image.network(comic.thumbnailUrl!, fit: BoxFit.cover)
-                  : Image.asset('assets/images/image_not_available.png',
-                      fit: BoxFit.cover),
+              child: Image.network(comic.thumbnailUrl, fit: BoxFit.fill)
             ),
             const SizedBox(height: 16.0),
             Text(
