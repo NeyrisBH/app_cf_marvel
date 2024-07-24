@@ -1,8 +1,8 @@
-import 'package:app_cf_marvel/data/local/database_app.dart';
+import 'package:app_cf_marvel/data/local/oauth/database_app.dart';
 import 'package:app_cf_marvel/utils/constants.dart';
 import 'package:flutter/foundation.dart';
 
-import '../data/local/tables.dart';
+import '../data/local/oauth/tables.dart';
 import '../data/remote/api.dart';
 import '../locator.dart';
 import '../model/session_model.dart';

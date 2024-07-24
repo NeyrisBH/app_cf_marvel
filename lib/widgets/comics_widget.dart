@@ -1,4 +1,3 @@
-import 'package:app_cf_marvel/data/local/database_app.dart';
 import 'package:app_cf_marvel/main_store/main_state.dart';
 import 'package:app_cf_marvel/model/comics_model.dart';
 import 'package:app_cf_marvel/res/theme/light_color.dart';
@@ -87,7 +86,7 @@ class ComicsWidgetState extends State<ComicsWidget> {
                     ),
                     const SizedBox(height: 4.0),
                     Text(
-                      cutDescription(comic.description),
+                      comic.description,
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
@@ -115,27 +114,6 @@ class ComicsWidgetState extends State<ComicsWidget> {
                             style: TextStyle(color: LightColor.background),
                           ),
                         ),
-                        IconButton(
-                          onPressed: () async {
-                            setState(() {
-                              comic.isFavorite = !comic.isFavorite;
-                            });
-                            final db = DatabaseApp();
-                            if (comic.isFavorite) {
-                              await db.insertComic(comic.title,
-                                  comic.description ?? '', comic.thumbnailUrl ?? '');
-                            } else {
-                              final favorites = await db.getComics();
-                              final favorite = favorites.firstWhere(
-                                  (fav) => fav['title'] == comic.title);
-                              await db.deleteComic(favorite['id']);
-                            }
-                          },
-                          icon: Icon(
-                            comic.isFavorite ? Icons.star : Icons.star_border,
-                            color: comic.isFavorite ? Colors.red : Colors.grey,
-                          ),
-                        ),
                       ],
                     )
                   ],
@@ -146,12 +124,5 @@ class ComicsWidgetState extends State<ComicsWidget> {
         ),
       ),
     );
-  }
-
-  String cutDescription(String? description) {
-    if (description != null && description.length > 100) {
-      return '${description.substring(0, 100)}...';
-    }
-    return description ?? '';
   }
 }

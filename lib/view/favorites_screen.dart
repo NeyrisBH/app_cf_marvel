@@ -1,68 +1,47 @@
-import 'package:app_cf_marvel/data/local/database_app.dart';
-import 'package:app_cf_marvel/widgets/favorites_widget.dart';
+import 'package:app_cf_marvel/data/local/favs/database_app.dart';
 import 'package:flutter/material.dart';
 
 class FavoritesScreen extends StatefulWidget {
   final int comicId;
-
-  const FavoritesScreen({super.key, required this.comicId});
+  final double initialRating;
+  const FavoritesScreen(
+      {super.key, required this.comicId, required this.initialRating});
 
   @override
   FavoritesScreenState createState() => FavoritesScreenState();
 }
 
 class FavoritesScreenState extends State<FavoritesScreen> {
-  late Future<Map<String, dynamic>> _comic;
+  late double rating;
 
   @override
   void initState() {
     super.initState();
-    _comic = _fetchComic();
+    rating = widget.initialRating;
   }
 
-  Future<Map<String, dynamic>> _fetchComic() async {
-    final db = DatabaseApp();
-    final List<Map<String, dynamic>> result = await db.getComics();
-    return result.firstWhere((comic) => comic['id'] == widget.comicId);
+  void _updateRating(double rating) async {
+    setState(() {
+      rating = rating;
+    });
+    final db = DatabaseFavApp();
+    await db.updateRating(widget.comicId, rating);
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Map<String, dynamic>>(
-      future: _comic,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Scaffold(
-            appBar: AppBar(title: const Text('Comic Details')),
-            body: const Center(child: CircularProgressIndicator()),
-          );
-        }
-
-        if (snapshot.hasError) {
-          return Scaffold(
-            appBar: AppBar(title: const Text('Comic Details')),
-            body: Center(child: Text('Error: ${snapshot.error}')),
-          );
-        }
-
-        final comic = snapshot.data!;
-        return Scaffold(
-          appBar: AppBar(title: Text(comic['title'])),
-          body: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                Text(comic['description']),
-                const SizedBox(height: 16.0),
-                FavoritesWidget(
-                  comicId: widget.comicId,
-                  initialRating: comic['rating'],
-                ),
-              ],
-            ),
-          ),
-        );
-      },
+    return Column(
+      children: [
+        Text('Rating: $rating'),
+        Slider(
+          value: rating,
+          min: 0.0,
+          max: 5.0,
+          divisions: 5,
+          label: rating.toString(),
+          onChanged: _updateRating,
+        ),
+      ],
     );
   }
 }

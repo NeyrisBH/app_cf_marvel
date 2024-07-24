@@ -1,4 +1,4 @@
-import 'package:app_cf_marvel/data/local/tables.dart';
+import 'package:app_cf_marvel/data/local/oauth/tables.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -22,47 +22,31 @@ class DatabaseApp {
   }
 
   _onCreate(Database database, int version) async {
-    if (kDebugMode) {
-      print("Creating tables...");
-    }
     for (final table in Tables.tables) {
-      await database.execute(table);
+    await database.execute(table);
+    if (kDebugMode) {
+      print('Table created: $table');
     }
   }
+  }
 
-  Future<void> insertComic(
-      String title, String description, String thumbnailUrl) async {
+  Future<void> insertFavorite(String title, String description, String thumbnailUrl) async {
     final db = await database;
     await db.insert(
-      Tables.comicsTable,
-      {
-        'title': title,
-        'description': description,
-        'thumbnailUrl': thumbnailUrl,
-        'rating': 0.0
-      },
+      Tables.favoritesTable,
+      {'title': title, 'description': description, 'thumbnailUrl': thumbnailUrl},
     );
   }
 
-  Future<void> updateRating(int id, double rating) async {
+  Future<List<Map<String, dynamic>>> getFavorites() async {
     final db = await database;
-    await db.update(
-      Tables.comicsTable,
-      {'rating': rating},
-      where: 'id = ?',
-      whereArgs: [id],
-    );
+    return await db.query(Tables.favoritesTable);
   }
 
-  Future<List<Map<String, dynamic>>> getComics() async {
-    final db = await database;
-    return await db.query(Tables.comicsTable);
-  }
-
-  Future<void> deleteComic(int id) async {
+  Future<void> deleteFavorite(int id) async {
     final db = await database;
     await db.delete(
-      Tables.comicsTable,
+      Tables.favoritesTable,
       where: 'id = ?',
       whereArgs: [id],
     );

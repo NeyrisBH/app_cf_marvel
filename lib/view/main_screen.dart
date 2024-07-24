@@ -25,11 +25,14 @@ class MainScreenState extends State<MainScreen> {
 
   final List<Widget> _pages = [
     const HomeScreen(),
-    const FavoritesScreen(comicId: 0,),
+    const FavoritesScreen(
+      comicId: 0,
+      initialRating: 0,
+    ),
     const NotificationsScreen(),
   ];
 
-    final List<String> titles = [
+  final List<String> titles = [
     'Inicio',
     'Favoritos',
     'Administrar Notificaciones',
@@ -68,7 +71,8 @@ class MainScreenState extends State<MainScreen> {
         destinations: const [
           NavigationDestination(icon: Icon(Icons.home), label: 'Inicio'),
           NavigationDestination(icon: Icon(Icons.star), label: 'Favoritos'),
-          NavigationDestination(icon: Icon(Icons.notifications), label: 'Notificaciones'),
+          NavigationDestination(
+              icon: Icon(Icons.notifications), label: 'Notificaciones'),
         ],
       ),
     );
@@ -95,11 +99,13 @@ class MainScreenState extends State<MainScreen> {
                     children: [
                       Text(
                         userState.user.value.name,
-                        style: const TextStyle(color: LightColor.background, fontSize: 20),
+                        style: const TextStyle(
+                            color: LightColor.background, fontSize: 20),
                       ),
                       Text(
                         userState.user.value.nickname,
-                        style: const TextStyle(color: Colors.white, fontSize: 15),
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 15),
                       ),
                     ],
                   ),

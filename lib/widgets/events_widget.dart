@@ -1,4 +1,3 @@
-import 'package:app_cf_marvel/data/local/database_app.dart';
 import 'package:app_cf_marvel/main_store/main_state.dart';
 import 'package:app_cf_marvel/model/events_model.dart';
 import 'package:app_cf_marvel/res/theme/light_color.dart';
@@ -113,27 +112,6 @@ class EventsWidgetState extends State<EventsWidget> {
                           child: const Text(
                             'Ver Detalles',
                             style: TextStyle(color: LightColor.background),
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () async {
-                            setState(() {
-                              event.isFavorite = !event.isFavorite;
-                            });
-                            final db = DatabaseApp();
-                            if (event.isFavorite) {
-                              await db.insertComic(event.title,
-                                  event.description ?? '', event.thumbnailUrl ?? '');
-                            } else {
-                              final favorites = await db.getComics();
-                              final favorite = favorites.firstWhere(
-                                  (fav) => fav['title'] == event.title);
-                              await db.deleteComic(favorite['id']);
-                            }
-                          },
-                          icon: Icon(
-                            event.isFavorite ? Icons.star : Icons.star_border,
-                            color: event.isFavorite ? Colors.red : Colors.grey,
                           ),
                         ),
                       ],

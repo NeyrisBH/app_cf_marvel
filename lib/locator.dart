@@ -6,7 +6,7 @@ import 'package:app_cf_marvel/repository/session_repo.dart';
 import 'package:app_cf_marvel/repository/user_repo.dart';
 import 'package:get_it/get_it.dart';
 
-import 'data/local/database_app.dart';
+import 'data/local/oauth/database_app.dart';
 import 'data/remote/api.dart';
 
 final sl = GetIt.instance;
