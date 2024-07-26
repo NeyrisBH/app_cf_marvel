@@ -24,6 +24,7 @@ class ComicModel {
       thumbnailUrl: _parseThumbnailUrl(
         validate.checkKeyExists(key: 'thumbnail', initialize: ''),
       ),
+      isFavorite: validate.checkKeyExists(key: 'fav', initialize: false) == true,
     );
   }
 
@@ -40,6 +41,7 @@ class ComicModel {
     'id': id,
     'title': title,
     'description': description,
-    'thumbnail': thumbnailUrl
+    'thumbnail': thumbnailUrl,
+    'fav': isFavorite ? true : false,
   };
 }
