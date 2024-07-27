@@ -67,7 +67,7 @@ class ComicsWidgetState extends State<ComicsWidget> {
                   borderRadius: BorderRadius.circular(8.0),
                   child: AspectRatio(
                     aspectRatio: 3 / 4,
-                    child: Image.network(comic.thumbnailUrl, fit: BoxFit.fill)
+                    child: Image.network(comic.thumbnail, fit: BoxFit.fill)
                   ),
                 ),
               ),

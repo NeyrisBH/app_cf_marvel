@@ -4,14 +4,14 @@ class ComicModel {
   final int id;
   final String title;
   final String description;
-  final String thumbnailUrl;
+  final String thumbnail;
   bool isFavorite;
 
   ComicModel({
     this.id = 0,
     this.title = '',
     this.description = '',
-    this.thumbnailUrl = '',
+    this.thumbnail = '',
     this.isFavorite = false,
   });
 
@@ -21,18 +21,20 @@ class ComicModel {
       id: validate.checkKeyExists(key: 'id', initialize: 0),
       title: validate.checkKeyExists(key: 'title', initialize: ''),
       description: validate.checkKeyExists(key: 'description', initialize: ''),
-      thumbnailUrl: _parseThumbnailUrl(
+      thumbnail: _parseThumbnailUrl(
         validate.checkKeyExists(key: 'thumbnail', initialize: ''),
       ),
-      isFavorite: validate.checkKeyExists(key: 'fav', initialize: false) == true,
+      isFavorite: false, // Initialize as false
     );
   }
 
-  static String _parseThumbnailUrl(Map<String, dynamic>? thumbnail) {
-    if (thumbnail != null &&
+  static String _parseThumbnailUrl(dynamic thumbnail) {
+    if (thumbnail is Map<String, dynamic> &&
         thumbnail.containsKey('path') &&
         thumbnail.containsKey('extension')) {
       return '${thumbnail['path']}.${thumbnail['extension']}';
+    } else if (thumbnail is String) {
+      return thumbnail; // Handle if thumbnail is already a URL string
     }
     return 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available';
   }
@@ -41,7 +43,7 @@ class ComicModel {
     'id': id,
     'title': title,
     'description': description,
-    'thumbnail': thumbnailUrl,
-    'fav': isFavorite ? true : false,
+    'thumbnail': thumbnail,
+    'fav': isFavorite ? 1 : 0,
   };
 }
