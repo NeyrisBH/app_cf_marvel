@@ -1,136 +1,106 @@
-# app_cf_marvel
+# ShopFast
 
 ## Descripción del Proyecto
 
-`app_cf_marvel` es una aplicación móvil desarrollada con Flutter y Dart que consume la API de Marvel para proporcionar información y detalles sobre cómics de Marvel. La aplicación utiliza patrones arquitectónicos como Modelo-Vista-Controlador (MVC) y el patrón Provider para la gestión del estado reactivo. Además, integra funcionalidades avanzadas como autenticación OAuth2, notificaciones locales, compras dentro de la aplicación y publicidad. La interfaz de usuario está optimizada con animaciones y transiciones fluidas para una experiencia de usuario mejorada.
-
-## Herramientas Usadas
-- **IDE:** Android Studio
-- **Framework:** Flutter SDK
-- **Lenguaje:** Dart
-- **Gestión de Estado:** Provider
-- **Autenticación OAuth:** flutter_oauth
-- **HTTP Requests:** http
-- **Almacenamiento Local:** sqflite
-- **Animaciones:** animations
-- **Notificaciones Locales:** flutter_local_notifications
-- **Publicidad:** google_mobile_ads
-
+**ShopFast** es una aplicación móvil desarrollada en Java para dispositivos Android que permite a los usuarios explorar, gestionar y realizar compras simuladas en una tienda de tecnología. La aplicación está diseñada con interfaces gráficas intuitivas que incluyen pantallas para inicio de sesión, lista de productos, carrito de compras y registro de clientes. Además, utiliza una base de datos local SQLite para la gestión de datos de los productos.
 
 ## Características
 
-- **Consumo de API de Marvel**: Obtén información detallada sobre cómics de Marvel.
-- **Gestión de estado reactivo**: Utilización de Provider para una gestión eficiente del estado.
-- **Autenticación OAuth2**: Integración de OAuth2 para un inicio de sesión seguro.
-- **Notificaciones locales**: Implementación de notificaciones locales para alertar a los usuarios.
-- **Publicidad**: Integración de anuncios para monetizar la aplicación.
-- **Animaciones y transiciones**: Interfaz de usuario optimizada con animaciones y transiciones fluidas.
+- **Interfaz de usuario funcional**: Pantallas diseñadas para login, listado de productos, carrito de compras y registro de clientes.
+- **Gestión de base de datos local**: Uso de SQLite para almacenar información sobre productos.
+- **Simulación de compras**: Permite agregar productos al carrito y visualizar detalles.
+- **Integración con Google Maps API**: Visualización de la ubicación física de la tienda.
+- **Inicio de sesión con Google**: Autenticación con la API de Gmail para una experiencia más segura.
+- **Compatibilidad nativa**: Desarrollada utilizando Android Studio para dispositivos Android.
 
 ## Requisitos Previos
 
-- [Flutter](https://flutter.dev/docs/get-started/install)
-- [Dart](https://dart.dev/get-dart)
+- **IDE**: [Android Studio](https://developer.android.com/studio)
+- **Versión mínima de Android**: 5.0 (API 21)
+- **Herramientas necesarias**:
+  - Java Development Kit (JDK)
+  - Google Play Services
+  - Clave de API de Google Maps
 
 ## Instalación
 
 1. Clona este repositorio:
-   ```sh
-   git clone https://github.com/tu_usuario/app_cf_marvel.git
-   cd app_cf_marvel
+   ```bash
+   git clone https://github.com/tu_usuario/shopfast.git
+   cd shopfast
 
-2. Instala las dependencias:
-      ```sh
-      flutter pub get
+2. Abre el proyecto en Android Studio:
 
-3. Configura la API de Marvel:
-        Regístrate y obtén tus claves API de Marvel Developer.
-        Configura tus claves API en tu archivo de configuración.
+    Selecciona File > Open y selecciona la carpeta del proyecto.
+
+3. Configura las claves de API:
+
+    Obtén una clave API de Google para Maps y Gmail.
+    Configura las claves en el archivo google_maps_api.xml dentro de res/values.
+
+4. Sincroniza las dependencias:
+
+    Asegúrate de que el archivo build.gradle esté actualizado y sincronízalo.
+
+5. Ejecuta la aplicación:
+
+    Conecta un dispositivo Android o utiliza un emulador para ejecutar el proyecto.
 
    
 ## Uso
 
-1. Ejecuta la aplicación:
-    ```sh
-    flutter run
+1. Inicia la aplicación:
 
-2. Navega por los cómics de Marvel en la pantalla principal.
+    Al abrir la aplicación, el usuario es llevado a la pantalla de inicio de sesión.
+
+2. Explora los productos:
+
+    Después de iniciar sesión, puedes navegar por la lista de productos disponibles.
+
+3. Gestiona tu carrito:
+
+    Agrega productos al carrito y revisa los detalles antes de proceder.
+
+4. Consulta la ubicación de la tienda:
+
+    Usa el mapa integrado para encontrar la ubicación física de la tienda.
+   
 
 ## Android Screenshots
 
-  Drawer                 |    Notifications Screen        
+  Home                 |    Login       
 :-------------------------:|:-------------------------:
-![HomePage](./screenshots/app-1.jpg) | ![DetailPage](screenshots/app-2.jpg)
+![HomePage](./screenshots/HomeActivity.png) | ![DetailPage](screenshots/LoginActivity.png)
 
-  Comics Widget                 |    Home Screen        
+  Menu Drawer                |    Register       
 :-------------------------:|:-------------------------:
-![HomePage](screenshots/app-3.jpg) | ![DetailPage](screenshots/app-4.jpg)
+![HomePage](screenshots/MenuDrawer.png) | ![DetailPage](screenshots/RegisterActivity.png)
 
 ## Estructura del Proyecto
 ```sh
-|-- lib
-|   |-- main.dart
-|   |-- locator.dart
-|   '-- |
-|       |-- data
-|       |   |-- local
-|       |   |    |-- database_app.dart
-|       |   |    '-- tables.dart
-|       |   |-- remote
-|       |       |-- api.dart
-|       |       '-- apiMarvel.dart
-|       |-- main_store
-|       |   '-- main_state.dart
-|       |-- navigation
-|       |   |-- navigation_app.dart
-|       |   |-- transitions.dart
-|       |   '-- route.dart
-|       |-- model
-|       |   |-- comics_model.dart
-|       |   |-- events_model.dart
-|       |   |-- series_model.dart
-|       |   |-- session_model.dart
-|       |   '-- user_model.dart
-|       |-- repository
-|       |   |-- comics_repo.dart
-|       |   |-- series_repo.dart
-|       |   |-- events_repo.dart
-|       |   |-- session_repo.dart
-|       |   '-- user_repo.dart
-|       |-- res
-|       |   |-- images
-|       |   '-- theme
-|       |       |-- light_color.dart
-|       |       '-- theme.dart
-|       |-- services
-|       |   '-- notifications_service.dart
-|       |-- util
-|       |   |-- constants.dart
-|       |   '-- validate.dart
-|       |-- view
-|       |   |-- comics_screen.dart
-|       |   |-- favorites_screen.dart
-|       |   |-- home_screen.dart
-|       |   |-- login_screen.dart
-|       |   |-- main_screen.dart
-|       |   |-- notifications_screen.dart
-|       |   '-- splash_screen.dart
-|       |-- view_model
-|       |   |-- comics
-|       |       '-- comics_state.dart
-|       |   |--session
-|       |       '-- session_state.dart
-|       |   |-- user
-|       |       '-- user_state.dart
-|       '-- widgets
-|           |-- navigatorBar_widget.dart
-|           |-- display_notification_widget.dart
-|           |-- series_widget.dart
-|           |-- events_widget.dart
-|           '-- comics_widget.dart
-|-- pubspec.yaml
-|-- screenshots
-|   |-- app-1.jpg
-|   |-- app-2.jpg
-|   |-- app-3.png
-|   '-- app-4.png
-'-- test
+|-- app
+|   |-- src
+|   |   |-- main
+|   |   |   |-- java/com/neyrisbh/shopfast
+|   |   |   |   |-- activities
+|   |   |   |   |   |-- LoginActivity.java
+|   |   |   |   |   |-- HomeActivity.java
+|   |   |   |   |   |-- ProductListActivity.java
+|   |   |   |   |   '-- CartActivity.java
+|   |   |   |   |-- models
+|   |   |   |   |   '-- Product.java
+|   |   |   |   |-- helpers
+|   |   |   |       '-- DatabaseHelper.java
+|   |   |   |-- res
+|   |   |       |-- layout
+|   |   |       |   |-- activity_login.xml
+|   |   |       |   |-- activity_home.xml
+|   |   |       |   |-- activity_product_list.xml
+|   |   |       |   '-- activity_cart.xml
+|   |   |       |-- drawable
+|   |   |       '-- values
+|   |   |           |-- strings.xml
+|   |   |           '-- google_maps_api.xml
+|   |   '-- AndroidManifest.xml
+|-- build.gradle
+|-- README.md
